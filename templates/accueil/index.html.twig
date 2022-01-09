@@ -1,29 +1,84 @@
 {% extends 'base.html.twig' %}
 
-{% block contenu %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
+{% block titreContenu %}
 <div class="example-wrapper">
-    <h1>Bienvenue sur la page d'accueil de Prostages" au sein d'un titre de niveau</h1>
-    <ul>
-        <li>
-            <a href="http://127.0.0.1:8000/entreprises">Entreprises</a>
-        </li>
-        <li>
-            <a href="http://127.0.0.1:8000/formations">Formations</a>
-        </li>
-        <li>
-            <a href="{{path('stages',{id:5})}}">Stages 1</a>
-        </li>
-        <li>
-            <a href="{{path('stages',{id:754})}}">Stages 2</a>
-        </li>
-        <li>
-            <a href="{{path('stages',{id:84})}}">Stages 3</a>
-        </li>
-    </ul>
+    <h3>Derniers ajouts</h3>
+    {% endblock %}
+    {% block contenu %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Entreprise
+                </th>
+                <th>
+                    Formation
+                </th>
+                <th>
+                    Mission
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{path('stages',{id:5})}}">Stages 1</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    BLAbla
+                </td>
+                <td>
+                    DUT
+                </td>
+                <td>
+                    BLAvlallafqfezfez
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{path('stages',{id:754})}}">Stages 2</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    BLekfdofpdog
+                </td>
+                <td>
+                    Lp pro
+                </td>
+                <td>
+                    dfdsgdfhfdvdfbsdbgbvsngsrhsgrnrn
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{path('stages',{id:84})}}">Stages 3</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    fbfsngfjhhrgqjtyky
+                </td>
+                <td>
+                    Lp Num
+                </td>
+                <td>
+                    frebefgbdfhghrefjihjerfdsojepogjreipvjhiptr
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
 </div>
 {% endblock %}
