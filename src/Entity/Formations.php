@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FormationsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,16 @@ class Formations
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Stages::class, mappedBy="formations")
+     */
+    private $stages;
+
+    public function __construct()
+    {
+        $this->stages = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +47,33 @@ class Formations
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stages[]
+     */
+    public function getStages(): Collection
+    {
+        return $this->stages;
+    }
+
+    public function addStage(Stages $stage): self
+    {
+        if (!$this->stages->contains($stage)) {
+            $this->stages[] = $stage;
+            $stage->addFormation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStage(Stages $stage): self
+    {
+        if ($this->stages->removeElement($stage)) {
+            $stage->removeFormation($this);
+        }
 
         return $this;
     }

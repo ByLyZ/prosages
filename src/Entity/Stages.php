@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StagesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +33,22 @@ class Stages
      * @ORM\Column(type="string", length=100)
      */
     private $email;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Entreprises::class, inversedBy="stages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $entreprise;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=formations::class, inversedBy="stages")
+     */
+    private $formations;
+
+    public function __construct()
+    {
+        $this->formations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -69,6 +87,42 @@ class Stages
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?Entreprises
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?Entreprises $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|formations[]
+     */
+    public function getFormations(): Collection
+    {
+        return $this->formations;
+    }
+
+    public function addFormation(formations $formation): self
+    {
+        if (!$this->formations->contains($formation)) {
+            $this->formations[] = $formation;
+        }
+
+        return $this;
+    }
+
+    public function removeFormation(formations $formation): self
+    {
+        $this->formations->removeElement($formation);
 
         return $this;
     }
