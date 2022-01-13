@@ -14,23 +14,6 @@ class AppFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        $FormationDUT = new Formations();
-        $FormationDUT->setNom("DUT");
-        $manager->persist($FormationDUT);
-
-        $FormationLPProg = new Formations();
-        $FormationLPProg->setNom("Licence Professionelle Programation Avancée");
-        $manager->persist($FormationLPProg);
-
-        $FormationLPNum = new Formations();
-        $FormationLPNum->setNom("Licence Professionelle Numérique");
-        $manager->persist($FormationLPNum);
-
-        $tabFormations = array($FormationDUT, $FormationLPProg, $FormationLPNum);
-        foreach($tabFormations as $typeFormation){
-            $manager->persist($typeFormation);
-        }
-
         for($i=0; $i <= 50; $i++)
         {
             $entreprise = new Entreprises();
@@ -47,22 +30,36 @@ class AppFixtures extends Fixture
 
             $manager->persist($entreprise);
         }
+        $formations = array("DUT","Licence Professionelle Programation Avancée","Licence Professionelle Numérique");
 
-        for($i=0; $i <= 50; $i++)
+        foreach($formations as $nom)
         {
-            $stages = new Stages();
+            $formation = new Formations();
+            $formation->setNom($nom);
 
-            $stages->setTitre($faker->jobTitle);
+            for($i=0; $i <= 50; $i++)
+            {
+                $stages = new Stages();
 
-            $stages->setDescMission($faker->realText($maxNbChars = 200, $indexSize = 2));
+                $stages->setTitre($faker->jobTitle);
 
-            $stages->setEmail($faker->email);
+                $stages->setDescMission($faker->realText($maxNbChars = 200, $indexSize = 2));
 
-            $stages->setEntreprise();
+                $stages->setEmail($faker->email);
 
-            $manager->persist($stages);
+                $stages->addFormation($formation);
+
+                $numEntreprise = $faker->numberBetween($min =0,$max=50);
+
+                $stages->setEntreprise($entreprises[$numEntreprise]);
+                $entreprises[$numEntreprise]->addStage($stages);
+
+                $manager->persist($entreprises[$numEntreprise]);
+
+                $manager->persist($stages);
+            }
+            $manager->persist($formation);
         }
-
         $manager->flush();
     }
 }

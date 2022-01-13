@@ -41,7 +41,7 @@ class Stages
     private $entreprise;
 
     /**
-     * @ORM\ManyToMany(targetEntity=formations::class, inversedBy="stages")
+     * @ORM\ManyToMany(targetEntity=Formations::class, inversedBy="stages")
      */
     private $formations;
 
@@ -104,14 +104,14 @@ class Stages
     }
 
     /**
-     * @return Collection|formations[]
+     * @return Collection|Formations[]
      */
     public function getFormations(): Collection
     {
         return $this->formations;
     }
 
-    public function addFormation(formations $formation): self
+    public function addFormation(Formations $formation): self
     {
         if (!$this->formations->contains($formation)) {
             $this->formations[] = $formation;
@@ -120,7 +120,7 @@ class Stages
         return $this;
     }
 
-    public function removeFormation(formations $formation): self
+    public function removeFormation(Formations $formation): self
     {
         $this->formations->removeElement($formation);
 

@@ -22,63 +22,30 @@
                 </th>
             </tr>
         </thead>
+        {% for stagesCourant in stages %}
         <tbody>
             <tr>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{path('stages',{id:5})}}">Stages 1</a>
+                            <a href="{{path('stages',{id:stagesCourant.id})}}">{{stagesCourant.titre}}</a>
                         </li>
                     </ul>
                 </td>
                 <td>
-                    BLAbla
+                    {{stagesCourant.entreprise.nom}}
                 </td>
                 <td>
-                    DUT
+                    {% for formation in stagesCourant.formations %}
+                    {{formation.nom}}
+                    {% endfor %}
                 </td>
                 <td>
-                    BLAvlallafqfezfez
+                    {{stagesCourant.descMission}}
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{path('stages',{id:754})}}">Stages 2</a>
-                        </li>
-                    </ul>
-                </td>
-                <td>
-                    BLekfdofpdog
-                </td>
-                <td>
-                    Lp pro
-                </td>
-                <td>
-                    dfdsgdfhfdvdfbsdbgbvsngsrhsgrnrn
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{path('stages',{id:84})}}">Stages 3</a>
-                        </li>
-                    </ul>
-                </td>
-                <td>
-                    fbfsngfjhhrgqjtyky
-                </td>
-                <td>
-                    Lp Num
-                </td>
-                <td>
-                    frebefgbdfhghrefjihjerfdsojepogjreipvjhiptr
-                </td>
-            </tr>
-            
         </tbody>
+        {% endfor %}
     </table>
 </div>
 {% endblock %}

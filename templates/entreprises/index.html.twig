@@ -5,3 +5,34 @@
     <h3>Cette page affichera la liste des entreprises proposant un stage" au sein d'un titre de niveau</h3>
 </div>
 {% endblock %}
+{% block contenu %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Entreprise
+            </th>
+            <th>
+                Activité
+            </th>
+        </tr>
+    </thead>
+    {% for entrepriseCourante in entreprises %}
+    <tbody>
+        <tr>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{path('stages',{id:entrepriseCourante.id})}}">{{entrepriseCourante.nom}}</a>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                {{entrepriseCourante.activite}}
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

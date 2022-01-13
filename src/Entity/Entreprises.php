@@ -40,7 +40,7 @@ class Entreprises
     private $activite;
 
     /**
-     * @ORM\OneToMany(targetEntity=stages::class, mappedBy="entreprise")
+     * @ORM\OneToMany(targetEntity=Stages::class, mappedBy="entreprise")
      */
     private $stages;
 
@@ -103,14 +103,14 @@ class Entreprises
     }
 
     /**
-     * @return Collection|stages[]
+     * @return Collection|Stages[]
      */
     public function getStages(): Collection
     {
         return $this->stages;
     }
 
-    public function addStage(stages $stage): self
+    public function addStage(Stages $stage): self
     {
         if (!$this->stages->contains($stage)) {
             $this->stages[] = $stage;
@@ -120,7 +120,7 @@ class Entreprises
         return $this;
     }
 
-    public function removeStage(stages $stage): self
+    public function removeStage(Stages $stage): self
     {
         if ($this->stages->removeElement($stage)) {
             // set the owning side to null (unless already changed)
