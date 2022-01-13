@@ -13,9 +13,8 @@ class AccueilController extends AbstractController
     /**
      * @Route("/", name="accueil")
      */
-    public function index(): Response
+    public function index(StagesRepository $repositoryStages): Response
     {
-        $repositoryStages = $this->getDoctrine()->getRepository(Stages::class);
         $stages = $repositoryStages->findAll();
 
         return $this->render('accueil/index.html.twig', ['controller_name' => 'AccueilController','stages' => $stages]);

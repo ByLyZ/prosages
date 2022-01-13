@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block titreContenu %}
+<div class="example-wrapper">
+    <h3>Liste de stage de la formation {{formation.nom}}</h3>
+    {% endblock %}
+    {% block contenu %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Entreprise
+                </th>
+                <th>
+                    Formation
+                </th>
+                <th>
+                    Mission
+                </th>
+            </tr>
+        </thead>
+        {% for stagesCourant in stages %}
+        <tbody>
+            <tr>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{path('stages',{id:stagesCourant.id})}}">{{stagesCourant.titre}}</a>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    {{stagesCourant.entreprise.nom}}
+                </td>
+                <td>
+                    {% for formation in stagesCourant.formations %}
+                    {{formation.nom}}
+                    {% endfor %}
+                </td>
+                <td>
+                    {{stagesCourant.descMission}}
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

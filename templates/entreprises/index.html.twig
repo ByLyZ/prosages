@@ -2,7 +2,7 @@
 
 {% block titreContenu %}
 <div class="example-wrapper">
-    <h3>Cette page affichera la liste des entreprises proposant un stage" au sein d'un titre de niveau</h3>
+    <h3>Liste des entreprises</h3>
 </div>
 {% endblock %}
 {% block contenu %}
@@ -23,7 +23,7 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{path('stages',{id:entrepriseCourante.id})}}">{{entrepriseCourante.nom}}</a>
+                        <a href="{{path('entreprises_stages',{id:entrepriseCourante.id})}}">{{entrepriseCourante.nom}}</a>
                     </li>
                 </ul>
             </td>

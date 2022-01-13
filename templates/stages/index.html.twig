@@ -2,6 +2,24 @@
 
 {% block titreContenu %}
 <div class="example-wrapper">
-    <h3>Cette page affichera le descriptif du stage ayant pour identifiant {{id}}</h3>
+    <h3>{{stages.titre}}</h3>
 </div>
+{% endblock %}
+{% block contenu %}
+Mission:
+<p>{{stages.descMission}}</p>
+
+
+
+
+Entreprise : 
+<ul><p>Nom :  {{stages.entreprise.nom}}</p>
+<p>Adresse :  {{stages.entreprise.adresse}}</p>
+<p>Lien Internet :  {{stages.entreprise.lienInternet}}</p>
+<p>Email : {{stages.email}}</p></ul>
+
+Formation :
+{% for formation in stages.formations %}
+        {{formation.nom}}
+{% endfor %}
 {% endblock %}
