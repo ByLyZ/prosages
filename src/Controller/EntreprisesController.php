@@ -24,13 +24,24 @@ class EntreprisesController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/entreprises/stages/{id}", name="entreprises_stages")
-     */
-    public function filtre(Entreprises $entreprises, StagesRepository $repositoryStages): Response
+//    /**
+//     * @Route("/entreprises/stages/{id}", name="entreprises_stages")
+//     */
+/*    public function filtre(Entreprises $entreprises, StagesRepository $repositoryStages): Response
     {
         $stages = $repositoryStages->findBy(['entreprise' => $entreprises->getId()]);
 
         return $this->render('entreprises/entrepriseStage.html.twig', ['controller_name' => 'EntreprisesController','stages' => $stages, 'entreprise' => $entreprises]);
+    }
+*/
+
+    /**
+     * @Route("/entreprises/stages/{nom}", name="entreprises_stages")
+     */
+    public function filtre(Entreprises $entreprises, StagesRepository $repositoryStages): Response
+    {
+        $stages = $repositoryStages->findByStageParNomEntreprise();
+
+        return $this->render('entreprises/entrepriseStage.html.twig', ['controller_name' => 'EntreprisesController']);
     }
 }

@@ -19,22 +19,21 @@ class EntreprisesRepository extends ServiceEntityRepository
         parent::__construct($registry, Entreprises::class);
     }
 
-    // /**
-    //  * @return Entreprises[] Returns an array of Entreprises objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Entreprises[] Returns an array of Entreprises objects
+      */
+    
+    public function findByStageParNomEntreprise()
     {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('s')
+            ->join('s.entreprises','e')
+            ->where('e.nom = : nomEntreprise')
+            ->setParameter('nomEntreprise', $entreprises->getNom())
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Entreprises
