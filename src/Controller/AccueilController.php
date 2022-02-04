@@ -15,7 +15,7 @@ class AccueilController extends AbstractController
      */
     public function index(StagesRepository $repositoryStages): Response
     {
-        $stages = $repositoryStages->findAll();
+        $stages = $repositoryStages->AfficherToutStage();
 
         return $this->render('accueil/index.html.twig', ['controller_name' => 'AccueilController','stages' => $stages]);
     }

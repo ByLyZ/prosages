@@ -40,7 +40,7 @@ class EntreprisesController extends AbstractController
      */
     public function filtre(Entreprises $entreprises, StagesRepository $repositoryStages): Response
     {
-        $stages = $repositoryStages->findByStageParNomEntreprise();
+        $stages = $repositoryStages->findByStageParNomEntreprise($entreprises->getNom());
 
         return $this->render('entreprises/entrepriseStage.html.twig', ['controller_name' => 'EntreprisesController']);
     }

@@ -22,18 +22,6 @@ class EntreprisesRepository extends ServiceEntityRepository
      /**
       * @return Entreprises[] Returns an array of Entreprises objects
       */
-    
-    public function findByStageParNomEntreprise()
-    {
-        return $this->createQueryBuilder('s')
-            ->join('s.entreprises','e')
-            ->where('e.nom = : nomEntreprise')
-            ->setParameter('nomEntreprise', $entreprises->getNom())
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    
 
     /*
     public function findOneBySomeField($value): ?Entreprises
