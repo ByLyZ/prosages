@@ -26,14 +26,31 @@ class StagesRepository extends ServiceEntityRepository
     public function findByStageParNomEntreprise($nomEntreprise)
     {
         return $this->createQueryBuilder('s')
+            ->select('s,e,f')
             ->join('s.entreprise','e')
-            ->where('e.nom = : nomEntreprise')
+            ->join('s.formations','f')
+            ->where('e.nom = :nomEntreprise')
             ->setParameter('nomEntreprise', $nomEntreprise)
             ->getQuery()
             ->getResult()
         ;
     }
 
+    public function findByStageParFormation($nomFormation)
+    {
+        $gestionnaireEntite=$this->getEntityManager();
+
+        $requete = $gestionnaireEntite->createQuery(
+            'SELECT stage,formation,entreprise
+            FROM App\Entity\Stages stage
+            JOIN stage.formations formation
+            JOIN stage.entreprise entreprise
+            WHERE formation.nom = :nomFormation'
+        );
+        $requete->setParameter('nomFormation', $nomFormation);
+
+        return $requete->execute();
+    }
     
     public function AfficherToutStage()
     {

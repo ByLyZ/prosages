@@ -38,10 +38,10 @@ class EntreprisesController extends AbstractController
     /**
      * @Route("/entreprises/stages/{nom}", name="entreprises_stages")
      */
-    public function filtre(Entreprises $entreprises, StagesRepository $repositoryStages): Response
+    public function filtre(StagesRepository $repositoryStages,$nom): Response
     {
-        $stages = $repositoryStages->findByStageParNomEntreprise($entreprises->getNom());
+        $stages = $repositoryStages->findByStageParNomEntreprise($nom);
 
-        return $this->render('entreprises/entrepriseStage.html.twig', ['controller_name' => 'EntreprisesController']);
+        return $this->render('entreprises/entrepriseStage.html.twig', ['stages' => $stages, 'nom' => $nom]);
     }
 }

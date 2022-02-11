@@ -19,18 +19,16 @@ class FormationsController extends AbstractController
     {
         $formations = $repositoryFormations->findAll();
 
-        return $this->render('formations/index.html.twig', [
-            'controller_name' => 'FormationsController', 'formations' => $formations
-        ]);
+        return $this->render('formations/index.html.twig', ['formations' => $formations]);
     }
 
     /**
-     * @Route("/formations/stages/{id}", name="formations_stages")
+     * @Route("/formations/stages/{nom}", name="formations_stages")
      */
-    public function filtre(Formations $formations): Response
+    public function filtre(StagesRepository $repositoryStages,$nom): Response
     {
-        $stages = $formations->getStages();
+        $stages = $repositoryStages->findByStageParFormation($nom);
 
-        return $this->render('formations/formationStage.html.twig', ['controller_name' => 'EntreprisesController','stages' => $stages, 'formation' => $formations]);
+        return $this->render('formations/formationStage.html.twig', ['stages' => $stages, 'nom' => $nom]);
     }
 }
