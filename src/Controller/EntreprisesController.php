@@ -44,4 +44,12 @@ class EntreprisesController extends AbstractController
 
         return $this->render('entreprises/entrepriseStage.html.twig', ['stages' => $stages, 'nom' => $nom]);
     }
+
+    /**
+     * @Route("/entreprises/ajouter/", name="entreprises_ajouter")
+     */
+    public function ajouterEntreprise()
+    {
+        return $this->render('entreprises/entrepriseAjouter.html.twig');
+    }
 }
