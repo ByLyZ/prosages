@@ -9,6 +9,7 @@ use App\Repository\EntreprisesRepository;
 use App\Entity\Entreprises;
 use App\Repository\StagesRepository;
 use App\Entity\Stages;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class EntreprisesController extends AbstractController
 {
@@ -53,10 +54,10 @@ class EntreprisesController extends AbstractController
         $entreprise=new Entreprises();
 
         $formulaireEntreprise= $this->createFormBuilder($entreprise)
-        ->add('nom')
-        ->add('adresse')
-        ->add('lienInternet')
-        ->add('activite')
+        ->add('nom', TextType::class)
+        ->add('adresse', TextType::class)
+        ->add('lienInternet', TextType::class)
+        ->add('activite', TextType::class)
         ->getForm();
 
         return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView()]);
