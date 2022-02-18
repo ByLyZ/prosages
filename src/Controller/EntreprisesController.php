@@ -50,6 +50,15 @@ class EntreprisesController extends AbstractController
      */
     public function ajouterEntreprise()
     {
-        return $this->render('entreprises/entrepriseAjouter.html.twig');
+        $entreprise=new Entreprises();
+
+        $formulaireEntreprise= $this->createFormBuilder($entreprise)
+        ->add('nom')
+        ->add('adresse')
+        ->add('lienInternet')
+        ->add('activite')
+        ->getForm();
+
+        return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView()]);
     }
 }
