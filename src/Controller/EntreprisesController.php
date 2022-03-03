@@ -11,6 +11,7 @@ use App\Repository\StagesRepository;
 use App\Entity\Stages;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EntreprisesController extends AbstractController
 {
@@ -50,7 +51,7 @@ class EntreprisesController extends AbstractController
     /**
      * @Route("/entreprises/ajouter/", name="entreprises_ajouter")
      */
-    public function ajouterEntreprise(Request $request)
+    public function ajouterEntreprise(Request $request, EntityManagerInterface $manager)
     {
         $entreprise=new Entreprises();
 
@@ -63,6 +64,14 @@ class EntreprisesController extends AbstractController
 
         $formulaireEntreprise->handleRequest($request);
         
+        if($formulaireEntreprise->isSubmitted())
+        {
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            return $this->redirectToRoute('entreprises');
+        }
+
         return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView()]);
     }
 }
