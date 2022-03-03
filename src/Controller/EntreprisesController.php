@@ -72,6 +72,32 @@ class EntreprisesController extends AbstractController
             return $this->redirectToRoute('entreprises');
         }
 
-        return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView()]);
+        return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView(), 'action'=>"ajouter"]);
+    }
+
+    /**
+     * @Route("/entreprises/modifier/{id}", name="entreprises_modifier")
+     */
+    public function modifierEntreprise(Request $request, EntityManagerInterface $manager, Entreprises $entreprise)
+    {
+
+        $formulaireEntreprise= $this->createFormBuilder($entreprise)
+        ->add('nom', TextType::class)
+        ->add('adresse', TextType::class)
+        ->add('lienInternet', TextType::class)
+        ->add('activite', TextType::class)
+        ->getForm();
+
+        $formulaireEntreprise->handleRequest($request);
+        
+        if($formulaireEntreprise->isSubmitted())
+        {
+            $manager->persist($entreprise);
+            $manager->flush();
+
+            return $this->redirectToRoute('entreprises');
+        }
+
+        return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView(), 'action'=>"modifier"]);
     }
 }

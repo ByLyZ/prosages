@@ -2,7 +2,11 @@
 
 {% block titreContenu %}
 <div class="example-wrapper">
+{% if action == "ajouter" %}
     <h3>Ajout d'une entreprise</h3>
+{% else %}
+    <h3>Modification d'une entreprise</h3>
+{% endif %}
 {% endblock %}
 {% block contenu %}
 {{ form_start(vueFormulaire) }}

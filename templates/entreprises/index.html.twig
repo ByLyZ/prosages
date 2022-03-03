@@ -30,6 +30,13 @@
             <td>
                 {{entrepriseCourante.activite}}
             </td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{path('entreprises_modifier',{id:entrepriseCourante.id})}}">Modifier</a>
+                    </li>
+                </ul>
+            </td>
         </tr>
     </tbody>
     {% endfor %}
