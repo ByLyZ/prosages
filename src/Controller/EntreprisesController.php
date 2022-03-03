@@ -10,6 +10,7 @@ use App\Entity\Entreprises;
 use App\Repository\StagesRepository;
 use App\Entity\Stages;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
 
 class EntreprisesController extends AbstractController
 {
@@ -49,7 +50,7 @@ class EntreprisesController extends AbstractController
     /**
      * @Route("/entreprises/ajouter/", name="entreprises_ajouter")
      */
-    public function ajouterEntreprise()
+    public function ajouterEntreprise(Request $request)
     {
         $entreprise=new Entreprises();
 
@@ -60,6 +61,8 @@ class EntreprisesController extends AbstractController
         ->add('activite', TextType::class)
         ->getForm();
 
+        $formulaireEntreprise->handleRequest($request);
+        
         return $this->render('entreprises/entrepriseAjouter.html.twig',['vueFormulaire' => $formulaireEntreprise->createView()]);
     }
 }
