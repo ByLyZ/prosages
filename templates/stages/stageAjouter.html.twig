@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block titreContenu %}
+<div class="example-wrapper">
+{% if action == "ajouter" %}
+    <h3>Ajout d'un stage</h3>
+{% else %}
+    <h3>Modification d'un stage</h3>
+{% endif %}
+{% endblock %}
+{% block contenu %}
+{{ form_start(vueFormulaire) }}
+
+{{ form_row(vueFormulaire.title, {'attr' : {'placeholder' : "Titre du stage"}}) }}
+
+{{ form_row(vueFormulaire.descMission, {'attr' : {'placeholder' : "Description du stage"}}) }}
+
+{{ form_row(vueFormulaire.email, {'attr' : {'placeholder' : "Email pour contacter l'entreprise"}}) }}
+
+<br> 
+<button type="submit" class="btn btn-dark">Enregistrer</button>
+
+{{ form_end(vueFormulaire) }}
+{% endblock %}

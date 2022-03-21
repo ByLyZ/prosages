@@ -11,6 +11,9 @@ use App\Repository\StagesRepository;
 use App\Entity\Stages;
 use App\Repository\EntreprisesRepository;
 use App\Entity\Entreprises;
+use App\Form\StageType;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 
 class StagesController extends AbstractController
 {
@@ -23,5 +26,27 @@ class StagesController extends AbstractController
             'controller_name' => 'StagesController',
             'stages'=>$stages,
         ]);
+    }
+
+    /**
+     * @Route("/stages/ajouter/", name="stages_ajouter")
+     */
+    public function ajouterStage(Request $request, EntityManagerInterface $manager)
+    {
+        $stage=new Stages();
+
+        $formulaireEntreprise= $this->createForm(StageType::class, $stage);
+
+        $formulaireStage->handleRequest($request);
+        
+        if($formulaireStage->isSubmitted() && $formulaireStage->isValid())
+        {
+            $manager->persist($stage);
+            $manager->flush();
+
+            return $this->redirectToRoute('stages');
+        }
+
+        return $this->render('stages/stageAjouter.html.twig',['vueFormulaire' => $formulaireStage->createView(), 'action'=>"ajouter"]);
     }
 }
