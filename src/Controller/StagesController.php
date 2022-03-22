@@ -18,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class StagesController extends AbstractController
 {
     /**
-     * @Route("/stages/ajouter/", name="stages_ajouter")
+     * @Route("/profile/stages/ajouter/", name="stages_ajouter")
      */
     public function ajouterStage(Request $request, EntityManagerInterface $manager): Response
     {
