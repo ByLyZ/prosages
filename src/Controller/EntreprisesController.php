@@ -52,7 +52,7 @@ class EntreprisesController extends AbstractController
     /**
      * @Route("/entreprises/ajouter/", name="entreprises_ajouter")
      */
-    public function ajouterEntreprise(Request $request, EntityManagerInterface $manager)
+    public function ajouterEntreprise(Request $request, EntityManagerInterface $manager): Response
     {
         $entreprise=new Entreprises();
 

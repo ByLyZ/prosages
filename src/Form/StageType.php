@@ -6,6 +6,10 @@ use App\Entity\Stages;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Form\EntrepriseType;
+use App\Entity\Formations;
+
 
 class StageType extends AbstractType
 {
@@ -15,8 +19,16 @@ class StageType extends AbstractType
             ->add('titre')
             ->add('descMission')
             ->add('email')
-            ->add('entreprise')
-            ->add('formations')
+            ->add('entreprise', EntrepriseType::class)
+            ->add('formations', EntityType::class, array(
+                'class' => Formations::class,
+            
+                'choice_label' => 'nom',
+            
+                // used to render a select box, check boxes or radios
+                'multiple' => true,
+                'expanded' => true,
+            ));
         ;
     }
 

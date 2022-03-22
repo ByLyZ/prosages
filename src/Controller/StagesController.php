@@ -18,24 +18,13 @@ use Doctrine\ORM\EntityManagerInterface;
 class StagesController extends AbstractController
 {
     /**
-     * @Route("/stages/{id}", name="stages")
-     */
-    public function index(Stages $stages): Response
-    {
-        return $this->render('stages/index.html.twig', [
-            'controller_name' => 'StagesController',
-            'stages'=>$stages,
-        ]);
-    }
-
-    /**
      * @Route("/stages/ajouter/", name="stages_ajouter")
      */
-    public function ajouterStage(Request $request, EntityManagerInterface $manager)
+    public function ajouterStage(Request $request, EntityManagerInterface $manager): Response
     {
         $stage=new Stages();
 
-        $formulaireEntreprise= $this->createForm(StageType::class, $stage);
+        $formulaireStage= $this->createForm(StageType::class, $stage);
 
         $formulaireStage->handleRequest($request);
         
@@ -44,9 +33,20 @@ class StagesController extends AbstractController
             $manager->persist($stage);
             $manager->flush();
 
-            return $this->redirectToRoute('stages');
+            return $this->redirectToRoute('accueil');
         }
 
-        return $this->render('stages/stageAjouter.html.twig',['vueFormulaire' => $formulaireStage->createView(), 'action'=>"ajouter"]);
+        return $this->render('stages/stageAjouter.html.twig',['vueFormulaire' => $formulaireStage->createView()]);
+    }
+
+    /**
+     * @Route("/stages/{id}", name="stages")
+     */
+    public function index(Stages $stages): Response
+    {
+        return $this->render('stages/index.html.twig', [
+            'controller_name' => 'StagesController',
+            'stages'=>$stages,
+        ]);
     }
 }
